@@ -2,7 +2,8 @@
      var socket = io.connect('http://localhost');
 
      socket.on('notify', function (data) {
-                   $('#image001').attr('src', data);
+                   console.log(data);
+                   $('#image001').attr('src', data.url);
 
                });
 

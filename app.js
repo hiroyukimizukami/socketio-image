@@ -52,18 +52,21 @@ io.sockets.on('connection', function (socket) {
                 var imgStructure = img.split(',');
                 var base64 = imgStructure[1];
 
-                console.log(base64);
                 if (!base64) {
                     console.log('fal to parse image');
                 }
 
+                var now = new Date().getTime();
+                var outputPath = './public/' + now + name;
+                var publicUrl = '/' + now  + name;
+
                 fs.writeFile(
-                    './public/' + name,
+                    outputPath,
                     new Buffer(base64, 'base64'),
                     function (err) {
                         console.log(err);
                     }
                 );
-//                socket.emit('notify', {image : data});
+                socket.emit('notify', {url : publicUrl});
   });
 });
